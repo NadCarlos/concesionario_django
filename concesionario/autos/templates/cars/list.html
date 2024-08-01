@@ -1,0 +1,36 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>Lista de Autos</h2>
+    <a href="#" class="btn btn-primary mb-3">Crear Producto</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.name }}</td>
+                <td>{{ car.description }}</td>
+                <td>{{ car.price }}</td>
+                <td>{{ car.category.name }}</td>
+                <td>{{ car.stock }}</td>
+                <td>
+                    <a href="{% url 'car_detail' car.id %}" class="btn btn-info btn-sm">Detalles</a>
+                    <a href="#" class="btn btn-success btn-sm">Editar</a>
+                    <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
