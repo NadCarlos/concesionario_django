@@ -1,7 +1,12 @@
 from django.views import View
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, redirect
 
-from autos.forms import CarForm
+from autos.forms import (
+    CarForm,
+    CarUpdateForm
+    )
 
 from autos.repositories.cars import CarRepository
 
@@ -10,6 +15,7 @@ carRepo = CarRepository()
 
 
 class CarList(View):
+
     def get(self, request):
         cars = carRepo.get_all()
         return render(
@@ -22,6 +28,7 @@ class CarList(View):
 
 
 class CarDetail(View):
+
     def get(self, request, id):
         car = carRepo.get_by_id(id=id)
         return render(
@@ -34,7 +41,9 @@ class CarDetail(View):
 
 
 class CarCreate(View):
-
+    
+    @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))
+    @method_decorator(login_required(login_url='login'))
     def get(self, request):
         form = CarForm(request.POST)
         return render(
@@ -45,6 +54,8 @@ class CarCreate(View):
             )
         )
     
+    @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))
+    @method_decorator(login_required(login_url='login'))
     def post(self, request):
         form = CarForm(request.POST)
         if form.is_valid():
@@ -63,9 +74,11 @@ class CarCreate(View):
 
 class CarUpdate(View):
 
+    @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))
+    @method_decorator(login_required(login_url='login'))
     def get(self, request, id):
         car = carRepo.get_by_id(id=id)
-        form = CarForm(instance=car)
+        form = CarUpdateForm(instance=car)
         return render(
             request,
             'cars/update.html',
@@ -74,6 +87,8 @@ class CarUpdate(View):
             )
         )
     
+    @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))
+    @method_decorator(login_required(login_url='login'))
     def post(self, request, id):
         car = carRepo.get_by_id(id=id)
 
@@ -92,6 +107,8 @@ class CarUpdate(View):
 
 class CarDelete(View):
 
+    @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))
+    @method_decorator(login_required(login_url='login'))
     def get(self, request, id):
         car = carRepo.get_by_id(id=id)
         carRepo.delete(car=car)

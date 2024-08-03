@@ -3,6 +3,7 @@ from django.contrib.auth import (
     authenticate,
 )
 from django.contrib.auth.models import User
+from usuarios.models import StandardUser
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
@@ -53,3 +54,15 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         return user
+    
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control custom-class'}),
+            'email': forms.TextInput(attrs={'class': 'form-control custom-class'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control custom-class'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control custom-class'}),
+        }
