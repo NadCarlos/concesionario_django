@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     #Custom Apps
     'autos',
     'home',
+    'usuarios',
 ]
 
 MIDDLEWARE = [
