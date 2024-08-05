@@ -11,7 +11,9 @@
                 <th>Rating</th>
                 <th>Fecha</th>
                 <th>Imagen</th>
-                <th>Acciones</th>
+                {% if user.is_staff %}
+                    <th>Acciones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -22,11 +24,13 @@
                 <td>{{ review.text }}</td>
                 <td>{{ review.rating.rating }}</td>
                 <td>{{ review.date }}</td>
-                <td><img src="{{ review.car.image.image.url }}" class="img-fluid"></td>
-                <td>
-                    <a href="{% url 'car_update_review' review.id %}" class="btn btn-success">Editar</a>
-                    <a href="{% url 'car_review_delete' review.id %}" class="btn btn-danger">Eliminar</a>
-                </td>
+                <td><img src="{{ review.car.image.image.url }}" style="width: 300px; height: 250px;" class="img-fluid"></td>
+                {% if user.is_staff %}
+                    <td>
+                        <a href="{% url 'car_update_review' review.id %}" class="btn btn-success">Editar</a>
+                        <a href="{% url 'car_review_delete' review.id %}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>

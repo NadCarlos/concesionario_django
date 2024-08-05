@@ -4,6 +4,9 @@ from autos.models import (
     Category,
     Country,
     Brand,
+    Fueltype,
+    DriveWheel,
+    Cylinders,
     Car,
     Rating,
     CarReview,
@@ -33,6 +36,27 @@ class CountryAdmin(admin.ModelAdmin):
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+    )
+
+
+@admin.register(Fueltype)
+class FueltypeAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+    )
+
+
+@admin.register(DriveWheel)
+class DriveWheelAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+    )
+
+
+@admin.register(Cylinders)
+class CylindersAdmin(admin.ModelAdmin):
     list_display = (
         'name',
     )

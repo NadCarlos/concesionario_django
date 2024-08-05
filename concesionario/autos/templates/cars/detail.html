@@ -12,11 +12,13 @@
             <p class="card-text"><strong>Stock:</strong> {{ car.stock }}</p>
             <p class="card-text"><strong>Categoría:</strong> {{ car.category.name }}</p>
             <p class="card-text"><strong>Pais de Origen:</strong> {{ car.paisOrigen.name }}</p>
-            <img src="{{ car.image.image.url }}" class="img-fluid">
+            <img src="{{ car.image.image.url }}" style="width: 300px; height: 250px;" class="img-fluid">
             <a href="{% url 'car_list' %}" class="btn btn-secondary">Volver a la lista</a>
-            <a href="{% url 'car_delete' car.id %}" class="btn btn-danger">Eliminar</a>
-            <a href="{% url 'car_update' car.id %}" class="btn btn-primary">Editar</a>
-            <a href="{% url 'car_update' car.id %}" class="btn btn-primary">Editar</a>
+            {% if user.is_staff %}
+                <a href="{% url 'car_delete' car.id %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'car_update' car.id %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'car_update' car.id %}" class="btn btn-primary">Editar</a>
+            {% endif %}
             <a href="{% url 'car_create_review' car.id %}" class="btn btn-primary">Valorar</a>
         </div>
     </div>

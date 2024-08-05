@@ -3,7 +3,9 @@
 {% block content %}
 <div class="container mt-3">
     <h2>Lista de Autos</h2>
-    <a href="car_create" class="btn btn-primary mb-3">Crear Auto</a>
+    {% if user.is_staff %}
+        <a href="car_create" class="btn btn-primary mb-3">Crear Auto</a>
+    {% endif %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,8 +27,11 @@
                 <td>{{ car.stock }}</td>
                 <td>
                     <a href="{% url 'car_detail' car.id %}" class="btn btn-info btn-sm">Detalles</a>
-                    <a href="{% url 'car_update' car.id %}" class="btn btn-success btn-sm">Editar</a>
-                    <a href="{% url 'car_delete' car.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% if user.is_staff %}
+                        <a href="{% url 'car_update' car.id %}" class="btn btn-success btn-sm">Editar</a>
+                        <a href="{% url 'car_delete' car.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% endif %}
+                    
                 </td>
             </tr>
             {% endfor %}

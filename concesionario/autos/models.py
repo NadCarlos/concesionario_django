@@ -29,6 +29,27 @@ class Brand(models.Model):
     
     def __str__(self):
         return  self.name
+    
+
+class Fueltype(models.Model):
+    name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return  self.name
+    
+
+class DriveWheel(models.Model):
+    name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return  self.name
+    
+
+class Cylinders(models.Model):
+    name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return  self.name
 
 
 class Car(models.Model):
@@ -65,6 +86,27 @@ class Car(models.Model):
 
     image = models.ForeignKey(
         CarImage,
+        on_delete=models.SET_NULL,
+        related_name='cars',
+        null=True,
+    )
+
+    fuel_type = models.ForeignKey(
+        Fueltype,
+        on_delete=models.SET_NULL,
+        related_name='cars',
+        null=True,
+    )
+
+    drive_wheel = models.ForeignKey(
+        DriveWheel,
+        on_delete=models.SET_NULL,
+        related_name='cars',
+        null=True,
+    )
+
+    cylinders = models.ForeignKey(
+        Cylinders,
         on_delete=models.SET_NULL,
         related_name='cars',
         null=True,

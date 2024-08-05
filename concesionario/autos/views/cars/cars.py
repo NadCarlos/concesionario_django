@@ -74,6 +74,7 @@ class CarCreate(View):
 
 class Unkwnown(View):
 
+    @method_decorator(login_required(login_url='login'))
     def get(self, request):
         return render(
             request,
