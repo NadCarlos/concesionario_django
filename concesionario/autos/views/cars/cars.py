@@ -72,6 +72,15 @@ class CarCreate(View):
             return redirect('car_detail', new_car.id)
         
 
+class Unkwnown(View):
+
+    def get(self, request):
+        return render(
+            request,
+            'cars/unknown.html'
+        )
+
+
 class CarUpdate(View):
 
     @method_decorator(permission_required(perm='concesionario.car_create', login_url='login', raise_exception=True))

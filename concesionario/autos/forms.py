@@ -1,5 +1,5 @@
 from django import forms
-from .models import Car
+from .models import Car, CarReview
 
 
 class CarForm(forms.ModelForm):
@@ -27,4 +27,17 @@ class CarUpdateForm(forms.ModelForm):
             'description': forms.TextInput(attrs={'class': 'form-control custom-class'}),
             'price': forms.NumberInput(attrs={'class': 'form-control custom-class'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control custom-class'}),
+        }
+
+
+class CarReviewForm(forms.ModelForm):
+    class Meta:
+        model = CarReview
+        fields = ['car', 'author', 'text', 'rating']
+
+        widgets = {
+            'car': forms.HiddenInput(),
+            'author': forms.HiddenInput(),
+            'text': forms.TextInput(attrs={'class': 'form-control custom-class'}),
+            'rating': forms.Select(attrs={'class': 'form-control custom-class'}),
         }

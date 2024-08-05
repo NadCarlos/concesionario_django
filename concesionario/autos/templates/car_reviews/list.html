@@ -1,0 +1,35 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div class="container mt-3">
+    <h2>Lista de Reviews</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Auto</th>
+                <th>Autor</th>
+                <th>Review</th>
+                <th>Rating</th>
+                <th>Fecha</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review.car }}</td>
+                <td>{{ review.author }}</td>
+                <td>{{ review.text }}</td>
+                <td>{{ review.rating.rating }}</td>
+                <td>{{ review.date }}</td>
+                <td><img src="{{ review.car.image.image.url }}" class="img-fluid"></td>
+                <td>
+                    <a href="{% url 'car_update_review' review.id %}" class="btn btn-success">Editar</a>
+                    <a href="{% url 'car_review_delete' review.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -5,6 +5,8 @@ from autos.models import (
     Country,
     Brand,
     Car,
+    Rating,
+    CarReview,
 )
 
 
@@ -40,4 +42,18 @@ class BrandAdmin(admin.ModelAdmin):
 class CarAdmin(admin.ModelAdmin):
     list_display = (
         'name',
+    )
+
+
+@admin.register(CarReview)
+class CarReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'text',
+    )
+
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    list_display = (
+        'rating',
     )
