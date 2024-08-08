@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="container mt-3">
-    <h2>Perfil de Usuario: {{ user }}</h2>
+    <h2>Nombre de Usuario: {{ user }}</h2>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ user.name }}</h5>
             <p class="card-text"><strong>Nombre:</strong> {{ user.first_name }}</p>
             <p class="card-text"><strong>Apellido:</strong> {{ user.last_name }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
             <a href="{% url 'profile_update' user.id %}" class="btn btn-primary">Editar</a>
         </div>
     </div>

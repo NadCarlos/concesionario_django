@@ -12,7 +12,7 @@
                 <th>Fecha</th>
                 <th>Imagen</th>
                 {% if user.is_staff %}
-                    <th>Acciones</th>
+                <th>Acciones</th>
                 {% endif %}
             </tr>
         </thead>
@@ -25,12 +25,14 @@
                 <td>{{ review.rating.rating }}</td>
                 <td>{{ review.date }}</td>
                 <td><img src="{{ review.car.image.image.url }}" style="width: 300px; height: 250px;" class="img-fluid"></td>
-                {% if user.is_staff %}
-                    <td>
+                <td>
+                    {% if user.is_authenticated %}
                         <a href="{% url 'car_update_review' review.id %}" class="btn btn-success">Editar</a>
+                    {% endif %}
+                    {% if user.is_staff %}
                         <a href="{% url 'car_review_delete' review.id %}" class="btn btn-danger">Eliminar</a>
-                    </td>
-                {% endif %}
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
