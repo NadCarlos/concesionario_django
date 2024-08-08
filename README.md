@@ -1,4 +1,4 @@
-# GoCardless sample application
+# Simple Dealership App
 
 ## Setup
 
