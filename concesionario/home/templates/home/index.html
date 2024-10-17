@@ -1,15 +1,17 @@
 {% extends 'home/base.html' %}
 
 {% block content %}
+{% load i18n %}
 <div class="row">
     <div class="col"></div>
     <div class="col">
         <div class="card">
             <img class="card-img-top" src="holder.js/100x180/" alt="">
             <div class="card-body">
-                <h4 class="card-title">Bienvenido {% if user.is_authenticated %} {{user.first_name}} {{user.last_name}} {% endif %} Al Sistema</h4>
+                <h4 class="card-title">{% trans "Bienvenido al Sistema" %}</h4>
+                <h4 class="card-title">{% if user.is_authenticated %} {{user.first_name}} {{user.last_name}} {% endif %}</h4>
                 {% if user.is_staff %}
-                    <p>Iniciaste Sesion Como Administrador</p>
+                    <p>{% trans "Iniciaste Sesion Como Administrador" %}</p>
                 {% endif %}
             </div>
         </div>
