@@ -1,4 +1,4 @@
-# GoCardless sample application
+# Simple Dealership App
 
 ## Setup
 
@@ -48,6 +48,7 @@ Create your admin account and navigate to `http://127.0.0.1:8000/admin/`.
 ## Data
 Add all the data you want and then navigate to `http://127.0.0.1:8000/` to see the interface so you
 can start interacting with it
+
 
 
 ## Api
