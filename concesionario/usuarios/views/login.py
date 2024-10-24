@@ -2,9 +2,12 @@ from django.contrib.auth import (
     login,
 )
 
+from django.utils.translation import activate
+
 from django.shortcuts import redirect, render
 from django.views import View
 from usuarios.forms import LoginForm
+from usuarios.models import StandardUser
 
 
 class LoginView(View):
@@ -13,6 +16,11 @@ class LoginView(View):
     template_name = 'users/login.html'
 
     def get(self, request):
+        if not request.user.is_anonymous:
+            profile = StandardUser.objects.get(user=request.user)
+            lang = profile.language
+            print(lang)
+            activate(lang)
         form = self.form_class()
 
         return render(

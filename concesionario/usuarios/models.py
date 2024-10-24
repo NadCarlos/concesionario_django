@@ -32,6 +32,15 @@ class Location(models.Model):
 class StandardUser(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    language = models.CharField(
+        max_length=30,
+        choices=[
+            ('en', 'English'),
+            ('es', 'Español'),
+        ],
+        default='es',
+    )
+
     localidad = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
