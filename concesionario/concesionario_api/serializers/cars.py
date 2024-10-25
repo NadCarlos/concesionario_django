@@ -39,16 +39,15 @@ class CarSerializer(serializers.ModelSerializer):
         category_data = validated_data.pop(
             'category', None
         )
-        category, _= Category.objects.get_or_create(
-          **category_data
-        )
 
-        instance.category = category
+        if category_data:
+            category, _ = Category.objects.get_or_create(**category_data)
+            instance.category = category
+
 
         instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get('description', instance.description)
         instance.price = validated_data.get('price', instance.price)
-        instance.active = validated_data.get('active', instance.active)
 
         instance.save()
         return instance

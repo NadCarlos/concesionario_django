@@ -16,13 +16,31 @@ from concesionario_api.serializers.cars import (
 class CarApiView(APIView):
 
     def get(self, request, *args, **kwargs):
-        autos = Car.objects.all()
-        serializer = CarSerializer(autos, many=True)
         car_id = self.kwargs.get('pk', None)
         if car_id:
-            cars = autos.get(id=car_id)
-            serializer = CarSerializer(autos)
+            car = Car.objects.get(id=car_id)
+            serializer = CarSerializer(car)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        autos = Car.objects.all()
+        serializer = CarSerializer(autos, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, *args, **kwargs):
+        serializer = CarSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def put(self, request, *args, **kwargs):
+        car_id = self.kwargs.get('pk', None)
+        car = Car.objects.get(id=car_id)
+        serializer = CarSerializer(car, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ComentariosApiView(APIView):

@@ -88,7 +88,58 @@ GET /api/car_apiview/
     "description": "el upe",
     "price": "145555.00"
   }
+  ...Every other car...
 ]
+```
+
+**Call:**
+```http
+GET /api/car_apigetone/<valid_car_id>/
+```
+
+**Expected Output:**
+```
+{
+  "name": "Cronos",
+  "pk": 6,
+  "brand": 1,
+  "stock": 31,
+  "category": {
+    "name": "Sedan",
+    "pk": 3
+  },
+  "description": "El mas comprado de la marca",
+  "price": "2500000.00"
+}
+```
+
+**Call:**
+```http
+GET /api/car_apiupdate/<valid_car_id>/
+```
+
+**Input:**
+```
+{
+    "name": "Cronos New",
+    "pk": "6",
+}
+```
+
+**Expected Output:**
+```
+{
+  "name": "Cronos New",
+  "pk": 6,
+  "brand": 1,
+  "stock": 31,
+  "category": {
+    "name": "Sedan",
+    "pk": 3
+  },
+  "description": "El mas comprado de la marca",
+  "price": "2500000.00"
+}
 ```
 
 **Call:**
